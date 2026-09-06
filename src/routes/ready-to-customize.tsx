@@ -65,7 +65,7 @@ function ReadyToCustomize() {
             <select className="field-input" value={size} onChange={(e) => setSize(Number(e.target.value))}>
               {SIZES.map((s, i) => <option key={s.label} value={i}>{s.label}</option>)}
             </select>
-            <div className="my-5 font-display text-2xl font-bold">₹{SIZES[size].price}</div>
+            <div className="my-5 font-display text-2xl font-bold">₹{SIZES[size]?.price ?? 0}</div>
             <button className="btn-primary w-full">Add to cart</button>
             <p className="mt-2.5 text-xs text-muted-foreground">
               Priced by the same engine as every other product — never a fixed template price.

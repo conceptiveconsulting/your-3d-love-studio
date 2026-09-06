@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as CorporateRouteImport } from './routes/corporate'
+import { Route as OccasionRouteImport } from './routes/occasion'
+import { Route as PersonalizeRouteImport } from './routes/personalize'
+import { Route as ReadyToCustomizeRouteImport } from './routes/ready-to-customize'
+import { Route as RecipientRouteImport } from './routes/recipient'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateRoute = CorporateRouteImport.update({
+  id: '/corporate',
+  path: '/corporate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OccasionRoute = OccasionRouteImport.update({
+  id: '/occasion',
+  path: '/occasion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonalizeRoute = PersonalizeRouteImport.update({
+  id: '/personalize',
+  path: '/personalize',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReadyToCustomizeRoute = ReadyToCustomizeRouteImport.update({
+  id: '/ready-to-customize',
+  path: '/ready-to-customize',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecipientRoute = RecipientRouteImport.update({
+  id: '/recipient',
+  path: '/recipient',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collections': typeof CollectionsRoute
+  '/corporate': typeof CorporateRoute
+  '/occasion': typeof OccasionRoute
+  '/personalize': typeof PersonalizeRoute
+  '/ready-to-customize': typeof ReadyToCustomizeRoute
+  '/recipient': typeof RecipientRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/collections': typeof CollectionsRoute
+  '/corporate': typeof CorporateRoute
+  '/occasion': typeof OccasionRoute
+  '/personalize': typeof PersonalizeRoute
+  '/ready-to-customize': typeof ReadyToCustomizeRoute
+  '/recipient': typeof RecipientRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collections': typeof CollectionsRoute
+  '/corporate': typeof CorporateRoute
+  '/occasion': typeof OccasionRoute
+  '/personalize': typeof PersonalizeRoute
+  '/ready-to-customize': typeof ReadyToCustomizeRoute
+  '/recipient': typeof RecipientRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/collections'
+    | '/corporate'
+    | '/occasion'
+    | '/personalize'
+    | '/ready-to-customize'
+    | '/recipient'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/collections'
+    | '/corporate'
+    | '/occasion'
+    | '/personalize'
+    | '/ready-to-customize'
+    | '/recipient'
+  id:
+    | '__root__'
+    | '/'
+    | '/collections'
+    | '/corporate'
+    | '/occasion'
+    | '/personalize'
+    | '/ready-to-customize'
+    | '/recipient'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollectionsRoute: typeof CollectionsRoute
+  CorporateRoute: typeof CorporateRoute
+  OccasionRoute: typeof OccasionRoute
+  PersonalizeRoute: typeof PersonalizeRoute
+  ReadyToCustomizeRoute: typeof ReadyToCustomizeRoute
+  RecipientRoute: typeof RecipientRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate': {
+      id: '/corporate'
+      path: '/corporate'
+      fullPath: '/corporate'
+      preLoaderRoute: typeof CorporateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/occasion': {
+      id: '/occasion'
+      path: '/occasion'
+      fullPath: '/occasion'
+      preLoaderRoute: typeof OccasionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personalize': {
+      id: '/personalize'
+      path: '/personalize'
+      fullPath: '/personalize'
+      preLoaderRoute: typeof PersonalizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ready-to-customize': {
+      id: '/ready-to-customize'
+      path: '/ready-to-customize'
+      fullPath: '/ready-to-customize'
+      preLoaderRoute: typeof ReadyToCustomizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recipient': {
+      id: '/recipient'
+      path: '/recipient'
+      fullPath: '/recipient'
+      preLoaderRoute: typeof RecipientRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollectionsRoute: CollectionsRoute,
+  CorporateRoute: CorporateRoute,
+  OccasionRoute: OccasionRoute,
+  PersonalizeRoute: PersonalizeRoute,
+  ReadyToCustomizeRoute: ReadyToCustomizeRoute,
+  RecipientRoute: RecipientRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

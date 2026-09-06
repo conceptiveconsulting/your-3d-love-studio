@@ -28,7 +28,7 @@ const PRODUCTS = [
 ];
 
 function Occasion() {
-  const [active, setActive] = useState(CHIPS[0]);
+  const [active, setActive] = useState<string>(CHIPS[0] ?? "");
   return (
     <PageShell>
       <div className="mx-auto max-w-[1180px] px-6 py-16">
