@@ -73,6 +73,7 @@ function ReadyToCustomize() {
       .from("orders")
       .insert({
         ...parsed.data,
+        notes: parsed.data.notes ?? null,
         color,
         size: SIZES[size]?.label ?? "",
         quantity: qty,
