@@ -25,6 +25,7 @@ const NAV = [
   { to: "/recipient", label: "Shop by recipient" },
   { to: "/corporate", label: "Corporate & bulk" },
   { to: "/collections", label: "Collections" },
+  { to: "/how-it-works", label: "How it works" },
 ] as const;
 
 export function SiteHeader() {
@@ -80,6 +81,7 @@ export function SiteFooter() {
           { label: "Corporate & bulk", to: "/corporate" },
         ]} />
         <FooterCol title="Help" links={[
+          { label: "How it works", to: "/how-it-works" },
           { label: "Photograph guidelines", to: "/personalize" },
           { label: "Shipping & returns", to: "/" },
           { label: "Track your order", to: "/" },

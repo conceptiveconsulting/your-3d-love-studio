@@ -65,6 +65,51 @@ export type Database = {
         }
         Relationships: []
       }
+      print_requests: {
+        Row: {
+          created_at: string
+          customer_name: string
+          email: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id: string
+          material: string
+          notes: string | null
+          phone: string
+          quantity: number
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          customer_name: string
+          email: string
+          file_name: string
+          file_path: string
+          file_size: number
+          id?: string
+          material: string
+          notes?: string | null
+          phone: string
+          quantity?: number
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          customer_name?: string
+          email?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          material?: string
+          notes?: string | null
+          phone?: string
+          quantity?: number
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
