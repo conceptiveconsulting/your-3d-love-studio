@@ -81,6 +81,7 @@ export function SiteFooter() {
           { label: "Corporate & bulk", to: "/corporate" },
         ]} />
         <FooterCol title="Help" links={[
+          { label: "How it works", to: "/how-it-works" },
           { label: "Photograph guidelines", to: "/personalize" },
           { label: "Shipping & returns", to: "/" },
           { label: "Track your order", to: "/" },
