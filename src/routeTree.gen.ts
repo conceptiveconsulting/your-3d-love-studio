@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as CorporateRouteImport } from './routes/corporate'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as OccasionRouteImport } from './routes/occasion'
 import { Route as PersonalizeRouteImport } from './routes/personalize'
 import { Route as ReadyToCustomizeRouteImport } from './routes/ready-to-customize'
@@ -30,6 +31,11 @@ const CollectionsRoute = CollectionsRouteImport.update({
 const CorporateRoute = CorporateRouteImport.update({
   id: '/corporate',
   path: '/corporate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OccasionRoute = OccasionRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/collections': typeof CollectionsRoute
   '/corporate': typeof CorporateRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/occasion': typeof OccasionRoute
   '/personalize': typeof PersonalizeRoute
   '/ready-to-customize': typeof ReadyToCustomizeRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/collections': typeof CollectionsRoute
   '/corporate': typeof CorporateRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/occasion': typeof OccasionRoute
   '/personalize': typeof PersonalizeRoute
   '/ready-to-customize': typeof ReadyToCustomizeRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/collections': typeof CollectionsRoute
   '/corporate': typeof CorporateRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/occasion': typeof OccasionRoute
   '/personalize': typeof PersonalizeRoute
   '/ready-to-customize': typeof ReadyToCustomizeRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/collections'
     | '/corporate'
+    | '/how-it-works'
     | '/occasion'
     | '/personalize'
     | '/ready-to-customize'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/collections'
     | '/corporate'
+    | '/how-it-works'
     | '/occasion'
     | '/personalize'
     | '/ready-to-customize'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/collections'
     | '/corporate'
+    | '/how-it-works'
     | '/occasion'
     | '/personalize'
     | '/ready-to-customize'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CollectionsRoute: typeof CollectionsRoute
   CorporateRoute: typeof CorporateRoute
+  HowItWorksRoute: typeof HowItWorksRoute
   OccasionRoute: typeof OccasionRoute
   PersonalizeRoute: typeof PersonalizeRoute
   ReadyToCustomizeRoute: typeof ReadyToCustomizeRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/corporate'
       fullPath: '/corporate'
       preLoaderRoute: typeof CorporateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/occasion': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CollectionsRoute: CollectionsRoute,
   CorporateRoute: CorporateRoute,
+  HowItWorksRoute: HowItWorksRoute,
   OccasionRoute: OccasionRoute,
   PersonalizeRoute: PersonalizeRoute,
   ReadyToCustomizeRoute: ReadyToCustomizeRoute,

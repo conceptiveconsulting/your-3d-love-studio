@@ -25,6 +25,7 @@ const NAV = [
   { to: "/recipient", label: "Shop by recipient" },
   { to: "/corporate", label: "Corporate & bulk" },
   { to: "/collections", label: "Collections" },
+  { to: "/how-it-works", label: "How it works" },
 ] as const;
 
 export function SiteHeader() {
