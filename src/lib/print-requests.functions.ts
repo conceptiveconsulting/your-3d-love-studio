@@ -17,6 +17,7 @@ export const submitPrintRequest = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => schema.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { requestPartnerQuote } = await import("@/lib/print-partner.server");
 
     const { data: row, error } = await supabaseAdmin
       .from("print_requests")
@@ -30,5 +31,42 @@ export const submitPrintRequest = createServerFn({ method: "POST" })
       .createSignedUrl(data.file_path, 60 * 60 * 24 * 7);
     if (signError || !signed) throw new Error("Could not create the download link");
 
-    return { id: row.id, downloadUrl: signed.signedUrl };
+    const quote = await requestPartnerQuote({
+      reference: row.id,
+      customer_name: data.customer_name,
+      email: data.email,
+      phone: data.phone,
+      file_name: data.file_name,
+      file_url: signed.signedUrl,
+      file_size: data.file_size,
+      material: data.material,
+      quantity: data.quantity,
+      notes: data.notes ?? null,
+    });
+
+    const partnerStatus = !quote.configured ? "not_sent" : quote.ok ? "quote_requested" : "failed";
+
+    await supabaseAdmin
+      .from("print_requests")
+      .update({
+        partner_status: partnerStatus,
+        partner_name: quote.partner_name,
+        partner_reference: quote.partner_reference,
+        quote_amount: quote.quote_amount,
+        quote_currency: quote.quote_currency,
+        quote_url: quote.quote_url,
+        partner_error: quote.error,
+      })
+      .eq("id", row.id);
+
+    return {
+      id: row.id,
+      downloadUrl: signed.signedUrl,
+      sentToPartner: quote.configured && quote.ok,
+      partnerName: quote.partner_name,
+      partnerReference: quote.partner_reference,
+      quoteAmount: quote.quote_amount,
+      quoteCurrency: quote.quote_currency,
+      quoteUrl: quote.quote_url,
+    };
   });
