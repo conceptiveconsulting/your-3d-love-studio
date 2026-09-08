@@ -23,7 +23,7 @@ export function StlUpload() {
   const [form, setForm] = useState({ customer_name: "", email: "", phone: "", notes: "" });
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [done, setDone] = useState<{ id: string; downloadUrl: string } | null>(null);
+  const [done, setDone] = useState<Awaited<ReturnType<typeof submitPrintRequest>> | null>(null);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -74,16 +74,36 @@ export function StlUpload() {
       <div className="rounded-[14px] border border-border bg-card p-6">
         <h3 className="mb-2 text-[20px]">File received — thank you!</h3>
         <p className="mb-3 text-[14px] text-muted-foreground">
-          Your reference is <strong className="text-foreground">{done.id.slice(0, 8).toUpperCase()}</strong>. Our print team
-          checks the file and emails you a firm quote within one working day.
+          Your reference is <strong className="text-foreground">{done.id.slice(0, 8).toUpperCase()}</strong>.
+          {done.sentToPartner
+            ? ` Your file has gone straight to ${done.partnerName ?? "our printing partner"} for a quote.`
+            : " Our print team checks the file and emails you a firm quote within one working day."}
         </p>
-        <a className="btn-primary inline-block" href={done.downloadUrl} target="_blank" rel="noopener noreferrer">
-          Download your file
-        </a>
+        {done.sentToPartner && (done.partnerReference || done.quoteAmount) && (
+          <p className="mb-3 text-[14px] text-muted-foreground">
+            {done.partnerReference && (
+              <>Partner reference <strong className="text-foreground">{done.partnerReference}</strong>. </>
+            )}
+            {done.quoteAmount !== null && (
+              <>Estimated price: <strong className="text-foreground">{done.quoteCurrency ?? ""} {done.quoteAmount}</strong>.</>
+            )}
+          </p>
+        )}
+        <div className="flex flex-wrap gap-3">
+          <a className="btn-primary inline-block" href={done.downloadUrl} target="_blank" rel="noopener noreferrer">
+            Download your file
+          </a>
+          {done.quoteUrl && (
+            <a className="btn-primary inline-block" href={done.quoteUrl} target="_blank" rel="noopener noreferrer">
+              View your quote
+            </a>
+          )}
+        </div>
         <p className="mt-2 text-xs text-muted-foreground">This private link stays valid for 7 days.</p>
       </div>
     );
   }
+
 
   return (
     <form onSubmit={send} className="rounded-[14px] border border-border bg-card p-6">

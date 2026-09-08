@@ -76,8 +76,15 @@ export type Database = {
           id: string
           material: string
           notes: string | null
+          partner_error: string | null
+          partner_name: string | null
+          partner_reference: string | null
+          partner_status: string
           phone: string
           quantity: number
+          quote_amount: number | null
+          quote_currency: string | null
+          quote_url: string | null
           status: string
         }
         Insert: {
@@ -90,8 +97,15 @@ export type Database = {
           id?: string
           material: string
           notes?: string | null
+          partner_error?: string | null
+          partner_name?: string | null
+          partner_reference?: string | null
+          partner_status?: string
           phone: string
           quantity?: number
+          quote_amount?: number | null
+          quote_currency?: string | null
+          quote_url?: string | null
           status?: string
         }
         Update: {
@@ -104,8 +118,15 @@ export type Database = {
           id?: string
           material?: string
           notes?: string | null
+          partner_error?: string | null
+          partner_name?: string | null
+          partner_reference?: string | null
+          partner_status?: string
           phone?: string
           quantity?: number
+          quote_amount?: number | null
+          quote_currency?: string | null
+          quote_url?: string | null
           status?: string
         }
         Relationships: []
