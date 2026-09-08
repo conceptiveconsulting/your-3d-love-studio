@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
 import { ProductCard } from "@/components/catalog";
+import { StlUpload } from "@/components/stl-upload";
 import carouselFigurine from "@/assets/carousel-figurine.jpg";
 
 export const Route = createFileRoute("/personalize")({
@@ -41,8 +42,12 @@ function Personalize() {
         <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
           {ITEMS.map((p) => <ProductCard key={p.title} {...p} />)}
         </div>
-        <button className="btn-primary mt-8">Start with your photograph</button>
+        <div id="upload" className="mt-12 max-w-[640px]">
+          <div className="section-label mb-2" style={{ color: "var(--brand-teal)" }}>Already have a 3D file?</div>
+          <StlUpload />
+        </div>
       </div>
+
     </PageShell>
   );
 }
